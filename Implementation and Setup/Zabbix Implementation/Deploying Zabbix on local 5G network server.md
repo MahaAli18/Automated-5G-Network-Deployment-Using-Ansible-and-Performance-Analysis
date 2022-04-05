@@ -154,3 +154,16 @@ Restarting the Zabbix-agent.service with the below command:
 ```
 zabbix@zabbix: $Systemctl restart zabbix-agent.service
 ```
+
+# Configuration for zabbix frontend: 
+
+Check the IP address of the Zabbix server machine.
+ 
+In our case it is ### (192.168.64.6) 
+as below:
+ 
+```
+zabbix@zabbix: $ ifconfig enp0s10
+ 
+```
+
