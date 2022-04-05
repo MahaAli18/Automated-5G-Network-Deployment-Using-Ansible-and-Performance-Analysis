@@ -179,4 +179,15 @@ We need our local VM machine configured accordingly to complete the Zabbix front
 In the browser, access the frontend with
 ### http://192.168.64.6/zabbix.
 
+The following steps were followed for the frontend config and to generate communication between server and frontend:
+ 
+Step 1:Following GUI opens for Zabbix front-end setup upon the successful communication link
+ 
+Step 2:All the required and measured values should be green as below:
+ 
+Step 3:Pre-installation summary with our created database configuration
+ 
+Step 4:Zabbix frontend is successfully configured and deployed
+Now, the Zabbix server host is created in the dashboard, and we can see the metrics collected in real-time for the Zabbix server.
+
 
