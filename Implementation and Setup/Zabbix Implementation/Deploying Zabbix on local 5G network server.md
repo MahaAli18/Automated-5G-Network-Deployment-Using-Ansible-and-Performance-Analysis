@@ -29,3 +29,19 @@ Changes done in the file are:
 ```session.auto_start= 0```
 ```mbstring.func_overload= 0```
 ```date.timezone= America/Toronto```
+
+### Step 3:
+
+Restart the apache2.service:
+```zabbix@zabbix: $ sudo systemctl restart apache2.service```
+
+### Step 4:
+
+Setting up the database MariaDB and installing packages:
+
+```zabbix@zabbix: $ sudo apt-get install libmysqlclient-dev```
+
+```zabbix@zabbix: $ sudo apt-get install mariadb-server mariadb-client libmariadbd-dev```
+
+```zabbix@zabbix: $ sudo systemctl start mariadb```
+
