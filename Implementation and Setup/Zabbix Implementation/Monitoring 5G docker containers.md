@@ -12,3 +12,31 @@ Zabbix agent 2 is a new generation of Zabbix agents and may be used in place of 
 * be a drop-in replacement for Zabbix agent (in that it supports all the previous functionality)
 
 Zabbix agent 2 will be beneficial for 5G based environment as by default,Zabbix agent 2 schedules the first data collection for active checks at a conditionally random time, which is less than item update interval, to prevent spikes in resource usage and better performance monitoring.
+
+### Configuration on :
+Ubuntu 20.4 ( The same VM on which the 5G docker containers are deployed ) and SSH access to this server node with a sudo user already configured )
+
+### Step 1:
+To monitor the 5G network containers , first the zabbix repository is installed and zabbix agent 2 is deployed upon the remote host i.e. our docker server , where the containers are deployed.
+
+```sudo wget https://repo.zabbix.com/5.4/ubuntu/pool/main/z/zabbix-release/zabbix-release-5.4-1+ubuntu20.04-all.deb```
+
+```sudo dpkg -i zabbix-release-5.4-1+ubuntu20.04-all.deb```
+
+```sudo apt update```
+
+```sudo apt install zabbix-agent2```
+
+### Step 2:
+
+The Zabbix agent is configured by default to send metrics to the Zabbix server on the same host where it is installed. Some additional variables are required because our goal is to monitor docker containers on a distant host.
+
+```sudo vim /etc/zabbix/zabbix-agent2.conf```
+
+Following configurations are done in the zabbix agent 2 config file :
+
+```Server: 192.168.64.6 ( zabbix server IP )```
+
+```ServerActive: 192.168.64.6 ( zabbix server IP )```
+
+```Hostname : maha-virtual-machine ( our docker container server )```
