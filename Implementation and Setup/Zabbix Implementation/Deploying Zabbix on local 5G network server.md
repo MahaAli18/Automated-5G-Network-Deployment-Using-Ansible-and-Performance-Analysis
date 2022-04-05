@@ -166,3 +166,17 @@ zabbix@zabbix: $ ifconfig enp0s10
  
 ```
 
+enp0s10: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
+ 
+Inet ### 192.168.64.6 netmask 255.255.255.0 broadcast 192.168.64.255
+ 
+inet6 fe80::dce0:b7ff:fe1a:5c06 prefixlen 64 scopeid 0x20<link>
+ 
+inet6 fd02:9ec7:a164:d0c9:dce0:b7ff:fe1a:5c06 prefixlen 64 scopeid 0x0<global>
+ 
+We need our local VM machine configured accordingly to complete the Zabbix front-end setup.Once the server was set up with the correct configuration, we used the Zabbix server frontend in the browser to complete the rest of the Zabbix frontend deployments as below:
+ 
+In the browser, access the frontend with
+### http://192.168.64.6/zabbix.
+
+
