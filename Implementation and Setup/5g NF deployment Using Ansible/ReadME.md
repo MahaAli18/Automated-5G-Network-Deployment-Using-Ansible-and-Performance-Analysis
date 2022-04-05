@@ -103,4 +103,4 @@ sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-opera
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/backup_crd.yaml
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/operator.yaml
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/cr.yaml
-sudo kubectl get pods```
+sudo kubectl get pods ```
