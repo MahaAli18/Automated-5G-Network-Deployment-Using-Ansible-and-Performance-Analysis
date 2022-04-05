@@ -58,3 +58,11 @@ Apply all the changes and enable the zabbix agent 2
 Running the status command to see zabbix agent 2 is running or not
 
 ``` sudo systemctl status zabbix-agent2```
+
+### Step 6:
+Now moving to the browser from 
+```https//:192.168.64.6/zabbix```
+and then configuring a zabbix host in order to monitor the 5G deployed containers.
+
+### Step 7: 
+Creating a host at zabbix frontend and adding a template called "Template app docker". This is the template for all the parameters of docker which are to be shared.
