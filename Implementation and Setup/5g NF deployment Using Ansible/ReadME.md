@@ -51,7 +51,7 @@ sudo git clone https://github.com/free5gc/free5gc.wiki.git
 docker network create -d bridge my-bridge-network
 ifconfig
 ```
-
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Creation%20of%20Docker%20Network.PNG)
 ### Step 4: Run ansible-playbook code:
 
 The architecture will be deployed using Playbook code, and users will only need to run one command to have a 5G network functioning locally or in the cloud. Clone and change it per system specifications and save the file in YAML format.
