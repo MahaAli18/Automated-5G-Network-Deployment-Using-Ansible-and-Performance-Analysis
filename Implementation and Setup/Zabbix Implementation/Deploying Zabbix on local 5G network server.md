@@ -108,6 +108,8 @@ zabbix@zabbix: $ sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix
 
 Before configuring the server, first, importing Zabbix’s initial database schema to the MySQL database. Importing the schema against the database created for the Zabbix application by issuing the below command:
 
-```zabbix@zabbix: $ sudo zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
+```
+zabbix@zabbix: $ sudo zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
+
 ```
 
