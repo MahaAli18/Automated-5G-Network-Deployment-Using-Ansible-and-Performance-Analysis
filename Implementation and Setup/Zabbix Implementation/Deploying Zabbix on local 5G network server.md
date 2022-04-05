@@ -112,4 +112,45 @@ Before configuring the server, first, importing Zabbix’s initial database sche
 zabbix@zabbix: $ sudo zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
 
 ```
+Now, set up the Zabbix server by opening the main configuration file for editing with the following command.
 
+```
+zabbix@zabbix: $ sudo nano /etc/zabbix/zabbix_server.conf
+```
+Changes done in the file are as follows:
+
+```
+DBHost= localhost
+
+DBName= zabbixdb
+
+DBUser= zabbixuser
+
+DBPassword= password1
+
+```
+Now, restart the Zabbix daemon to apply changes by issuing the below command.
+
+```
+zabbix@zabbix: $ sudo systemctl restart zabbix-server.service
+```
+
+Configuration of local Zabbix agent is required to monitor the Zabbix server as well, for which we needed to change the Zabbix agent configuration file as below:
+
+```
+zabbix@zabbix: $ sudo nano /etc/zabbix/zabbix_agentd.conf
+
+```
+Changes required in zabbix_agentd.conf file :
+
+```
+Server: 127.0.0.1
+
+Listenport:10050
+
+```
+Restarting the Zabbix-agent.service with the below command:
+
+```
+zabbix@zabbix: $Systemctl restart zabbix-agent.service
+```
