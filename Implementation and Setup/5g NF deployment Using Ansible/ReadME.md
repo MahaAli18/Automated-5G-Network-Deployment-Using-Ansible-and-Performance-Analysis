@@ -40,6 +40,12 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 sudo git clone https://github.com/free5gc/free5gc.wiki.git
  ```
+ 
+ ### Step 3: Create Network using the Docker command
+```
+docker network create -d bridge my-bridge-network
+ifconfig
+```
 
 ### Step 4: Run ansible-playbook code:
 
