@@ -64,3 +64,11 @@ sudo docker ps
 ```docker exec -ti ue bash```
 ```ping labora.inf.ufg.br -I```
 «ip-address-user-equipment-interface»
+
+## Orchestrating containers using Kubernetes:
+To illustrate and monitor functions of the 5G deployment in the cloud, Kubernetes is used to orchestrate all the containerized components of the 5G network like core network functions, UE, and gNodeB. Kubernetes is an open-source framework for managing containerized workloads and services that enables declarative configuration and automation. It has a vast and fast-expanding ecosystem. Kubernetes' automation makes developing container-based apps much more accessible.
+
+### System Requirements:
+Ubuntu Version: 18.04.6 LTS (Bionic Beaver)
+Disk Space: 100 GB
+RAM: 4 GB
