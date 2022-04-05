@@ -38,6 +38,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/docker_setup.png)
 
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/docker_status.png)
+
 
 ### Step 2: Clone Free5gc:
 ```
@@ -63,6 +65,7 @@ sudo ansible-playbook -K file_name.yml -e "internet_network_interface=<< interne
 sudo docker ps
 
 ```
+
 ### Step 6: Test and access UE’s components
 ```docker exec -ti ue bash```
 
