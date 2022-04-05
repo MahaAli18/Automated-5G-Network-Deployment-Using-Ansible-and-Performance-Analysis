@@ -62,7 +62,9 @@ sudo docker ps
 ```
 ### Step 6: Test and access UE’s components
 ```docker exec -ti ue bash```
+
 ```ping labora.inf.ufg.br -I```
+
 «ip-address-user-equipment-interface»
 
 ## Orchestrating containers using Kubernetes:
