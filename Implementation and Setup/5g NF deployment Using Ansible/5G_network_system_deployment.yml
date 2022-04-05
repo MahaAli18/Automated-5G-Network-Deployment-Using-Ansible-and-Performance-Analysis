@@ -825,3 +825,269 @@ pcch_default_PagingCycle                    = 128;
                         MNC="280";
                         MCC="310";
                     };
+PLMN6: {
+                        FULLNAME="FICTITIOUS USA";
+                        SHORTNAME="FICTITIO";
+                        MNC="028";
+                        MCC="310";
+                    };
+                    PLMN7: {
+                        FULLNAME="Vodafone Italia";
+                        SHORTNAME="VODAFONE";
+                        MNC="10";
+                        MCC="222";
+                    };
+                    PLMN8: {
+                        FULLNAME="Vodafone Spain";
+                        SHORTNAME="VODAFONE";
+                        MNC="01";
+                        MCC="214";
+                    };
+                    PLMN9: {
+                        FULLNAME="Vodafone Spain";
+                        SHORTNAME="VODAFONE";
+                        MNC="06";
+                        MCC="214";
+                    };
+                    PLMN10: {
+                        FULLNAME="ROSHAN AFG";
+                        SHORTNAME="ROSHAN";
+                        MNC="20";
+                        MCC="412";
+                    };
+                    PLMN11: {
+                        FULLNAME="MTN AFG";
+                        SHORTNAME="MTN";
+                        MNC="40";
+                        MCC="412";
+                    };
+                };
+          when  : deploy_oaisim == 'true'
+
+        - name  : Build UE ue_eurecom_test_sfr.conf file 3/5
+          blockinfile:
+            path: /{{ BASE_DIR_INSTALL }}/ue_eurecom_test_sfr.conf
+            block: |
+                {{ item.ue_id }}:
+                  {
+                        USER: {
+                            IMEI="356113022094149";
+                            MANUFACTURER="EURECOM";
+                            MODEL="LTE Android PC";
+                            PIN="0000";
+                        };
+                        SIM: {
+                            MSIN="{{ item.msin }}";
+                            USIM_API_K="{{ USIM_API_K }}";
+                            OPC="{{ OPC }}";
+                            MSISDN="33638020004";
+                        };
+                        HPLMN= "{{ HPLMN }}";
+                        UCPLMN_LIST = ();
+                        OPLMN_LIST = ("00101", "30210", "30211", "30213", "30234", "310280", "310028");
+                        OCPLMN_LIST = ("22210", "21401", "21406", "41220", "41240");
+                        FPLMN_LIST = ();
+                        EHPLMN_LIST= ();
+                    };
+            marker: "# {mark} User Equipment {{ item.ue_id }}"
+          loop: "{{ user_equiments }}"
+          loop_control:
+            index_var: ue_idx
+        
+        - name  : Build UE ue_eurecom_test_sfr.conf file 4/5 
+          shell : |
+                docker cp ./ue_eurecom_test_sfr.conf {{ UE_container_name }}:/{{ UE_folder_name_container_name }}/openair3/NAS/TOOLS/ue_eurecom_test_sfr.conf
+          args:
+            chdir: "{{ BASE_DIR_INSTALL }}"
+          when  : deploy_oaisim == 'true'
+
+        - name  : Build UE ue_eurecom_test_sfr.conf file 5/5 
+          shell : |
+                  docker exec {{ UE_container_name }} /bin/sh -c "cd /{{ UE_folder_name_container_name }}/targets/bin && sudo ./conf2uedata -c /{{ UE_folder_name_container_name }}/openair3/NAS/TOOLS/ue_eurecom_test_sfr.conf -o /{{ UE_folder_name_container_name }}/cmake_targets/ran_build/build/"
+          when  : deploy_oaisim == 'true'
+
+        - name  : Exec/Start MONGO-DB container
+          shell:  |
+                  docker exec -d {{ MONGO_DB_container_name }} /bin/sh -c "/etc/init.d/mongodb start"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Running WEBUI container
+          shell :  |
+                  docker exec -d {{ WEB_UI_container_name }} /bin/sh -c "cd {{ path_workspace_free5gc }}/webui && npm run dev"
+          when  : start_webapp == 'true' and  deploy_free5gc == 'true'
+
+        - name  : Build certificates - AMF container
+          shell :  |
+                  docker exec {{ AMF_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/build_certs.sh"
+                  docker exec {{ AMF_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/build_certs.sh"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Copy config file's to UPF container 
+          shell : |
+                docker cp ./iptables_upf.sh {{ UPF_container_name }}:{{ path_workspace_free5gc }}/iptables_upf.sh
+                docker cp ./setup_upf.sh     {{ UPF_container_name }}:{{ path_workspace_free5gc }}/setup_upf.sh
+          args:
+            chdir: "{{ BASE_DIR_INSTALL }}"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Build certificates - UPF container
+          shell :  |
+                  docker exec {{ UPF_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/setup_upf.sh"
+                  docker exec {{ UPF_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/setup_upf.sh"
+
+                  docker exec {{ UPF_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/iptables_upf.sh"
+                  docker exec {{ UPF_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/iptables_upf.sh"
+
+                  docker exec {{ UPF_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/build_certs.sh"
+                  docker exec {{ UPF_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/build_certs.sh"                  
+          when  : deploy_free5gc == 'true'
+
+        - name  : Build certificates - SMF container
+          shell :  |
+                  docker exec {{ SMF_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/build_certs.sh"
+                  docker exec {{ SMF_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/build_certs.sh"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Build certificates - HSS container
+          shell :  |
+                  docker exec {{ HSS_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/build_certs.sh"
+                  docker exec {{ HSS_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/build_certs.sh"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Build certificates - PCRF container
+          shell :  |
+                  docker exec {{ PCRF_container_name }} /bin/sh -c "chmod u+x {{ path_workspace_free5gc }}/build_certs.sh"
+                  docker exec {{ PCRF_container_name }} /bin/sh -c "{{ path_workspace_free5gc }}/build_certs.sh"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Remove amf.conf default file from AMF container 
+          ignore_errors: true
+          shell : |
+              docker exec {{ AMF_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/*.conf"
+              docker exec {{ AMF_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/*.conf"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Remove smf.conf default file from SMF container 
+          ignore_errors: true
+          shell : |
+              docker exec {{ SMF_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/*.conf"
+              docker exec {{ SMF_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/*.conf"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Remove hss.conf default file from HSS container 
+          ignore_errors: true
+          shell : |
+              docker exec {{ HSS_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/*.conf"
+              docker exec {{ HSS_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/*.conf"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Remove pcrf.conf default file from PCRF container 
+          ignore_errors: true
+          shell : |
+              docker exec {{ PCRF_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/*.conf"
+              docker exec {{ PCRF_container_name }} /bin/sh -c "rm -rf {{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/*.conf"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Copy config file's to free5gc container's 
+          shell : |
+                docker cp ./free5gc.conf {{ AMF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/free5gc.conf
+                docker cp ./free5gc.conf {{ SMF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/free5gc.conf
+                docker cp ./free5gc.conf {{ HSS_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/free5gc.conf
+                docker cp ./free5gc.conf {{ PCRF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/free5gc.conf
+                docker cp ./free5gc.conf {{ UPF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/free5gc.conf
+                docker cp ./amf.conf     {{ AMF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/amf.conf
+                docker cp ./smf.conf     {{ SMF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/smf.conf
+                docker cp ./hss.conf     {{ HSS_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/hss.conf
+                docker cp ./pcrf.conf    {{ PCRF_container_name }}:{{ path_workspace_free5gc }}/install/etc/free5gc/freeDiameter/pcrf.conf
+          args:
+            chdir: "{{ BASE_DIR_INSTALL }}"
+          when  : deploy_free5gc == 'true'
+
+        - name  : Wait for port WEB_UI response
+          wait_for:
+            port: "{{ web_application_access_port }}"
+            delay: 3
+          when  : deploy_free5gc == 'true'
+
+        - name  : Get CSRF Access Token - WEBUI container
+          shell : |
+              curl -s "http://{{ ansible_default_ipv4.address }}:{{ web_application_access_port }}/api/auth/csrf" -H 'Connection: keep-alive' -H 'Accept: application/json, text/plain, */*' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36' -H 'X-CSRF-TOKEN: undefined' -H 'Sec-Fetch-Site: same-origin' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Dest: empty' -H 'Accept-Language: en-US,en;q=0.9,pt;q=0.8,pt-BR;q=0.7' -v --cookie-jar /tmp/free5gc.txt --compressed | sed 's/.*"csrfToken":"\([^"]\+\)".*/\1/'        
+          register: csrf
+          when  : deploy_free5gc == 'true'
+       
+        - pause :
+            seconds: 5
+          when  : deploy_free5gc == 'true'
+
+        - name  : Login - WEBUI container
+          shell: |
+              curl "http://{{ ansible_default_ipv4.address }}:{{ web_application_access_port }}/api/auth/login" -H 'Connection: keep-alive' -H 'Accept: application/json, text/plain, */*' -H "X-CSRF-TOKEN: {{ csrf.stdout }}" -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36' -H 'Content-Type: application/json;charset=UTF-8' -H 'Origin: http://{{ ansible_default_ipv4.address }}:{{ web_application_access_port }}' -H 'Sec-Fetch-Site: same-origin' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Dest: empty' -H 'Accept-Language: en-US,en;q=0.9,pt;q=0.8,pt-BR;q=0.7' -b /tmp/free5gc.txt -o /dev/null --data-binary '{"username":"{{ default_username_WEBUI }}","password":"{{ default_password_WEBUI }}"}' --compressed  
+          when  : deploy_free5gc == 'true'
+
+        - name  : Add User equipments - WEBUI container
+          shell: |
+              curl "http://{{ ansible_default_ipv4.address }}:{{ web_application_access_port }}/api/db/Subscriber" -H 'Connection: keep-alive' -H 'Accept: application/json, text/plain, */*' -H "X-CSRF-TOKEN: {{ csrf.stdout }}" -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36' -H 'Content-Type: application/json;charset=UTF-8' -H 'Sec-Fetch-Site: same-origin' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Dest: empty' -H 'Accept-Language: en-US,en;q=0.9,pt;q=0.8,pt-BR;q=0.7' -b /tmp/free5gc.txt --data-binary '{"imsi":"{{ HPLMN }}{{ item.msin }}","security":{"k":"{{ USIM_API_K }}","amf":"8000","op_type":0,"op_value":"{{ OPC }}","op":null,"opc":"{{ OPC }}"},"ambr":{"downlink":1024000,"uplink":1024000},"pdn":[{"apn":"internet","qos":{"qci":9,"arp":{"priority_level":8,"pre_emption_capability":1,"pre_emption_vulnerability":1}}}]}' --compressed
+
+          loop: "{{ user_equiments }}"
+          loop_control:
+            index_var: ue_idx
+
+        - name  : Clear file instalation
+          shell : rm -rf {{ BASE_DIR_INSTALL }}
+          when  : clear_file_instalation == 'true'
+
+        - name  : Run AMF simulation process 
+          shell : |
+              docker exec -it -d {{ AMF_container_name }} /bin/sh -c "/root/free5gc-stage-1/install/bin/free5gc-amfd"
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - pause :
+            seconds: 5
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - name  : Run UPF simulation process 
+          shell : |
+              docker exec -it -d {{ UPF_container_name }} /bin/sh -c "/root/free5gc-stage-1/install/bin/free5gc-upfd"
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - pause :
+            seconds: 5
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - name  : Run SMF simulation process 
+          shell : |
+              docker exec -it -d {{ SMF_container_name }} /bin/sh -c "/root/free5gc-stage-1/install/bin/free5gc-smfd"
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - pause :
+            seconds: 5
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - name  : Run HSS simulation process 
+          shell : |
+              docker exec -it -d {{ HSS_container_name }} /bin/sh -c "/root/free5gc-stage-1/install/bin/nextepc-hssd"
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - pause :
+            seconds: 5
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - name  : Run PCRF simulation process 
+          shell : |
+              docker exec -it -d {{ PCRF_container_name }} /bin/sh -c "/root/free5gc-stage-1/install/bin/nextepc-pcrfd"
+          when  : init_free5gc_elements_simulation == 'true'
+
+        - name  : Run ENB Simulation process 
+          shell : |
+              docker exec -it -d {{ ENB_container_name }} /bin/sh -c "cd /root/enb/cmake_targets/ran_build/build && sudo -E ./lte-softmodem -O /root/enb/ci-scripts/conf_files/rcc.band7.tm1.nfapi.conf > enb.log 2>&1"
+          when  : init_enb == 'true'
+
+        - pause :
+            seconds: 15
+          when  : init_enb == 'true'
+
+        - name  : Run UE Simulation process 
+          shell : |
+          docker exec -it -d {{ UE_container_name }} /bin/sh -c "cd /root/ue/cmake_targets/ran_build/build && ./lte-uesoftmodem -O /root/ue/ci-scripts/conf_files/ue.nfapi.conf --L2-emul 3 --num-ues {{ num_ues_init_simulation }} --nums_ue_thread 1 --nokrnmod 1 > ue.log 2>&1"
+          when  : init_ue == 'true'
+          
