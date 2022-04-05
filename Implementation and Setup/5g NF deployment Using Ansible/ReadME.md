@@ -106,3 +106,24 @@ sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-opera
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/cr.yaml
 sudo kubectl get pods 
 ```
+
+### Step 4: Deploying images from Free5gc and setting up AMF/UPF
+
+Images are pulled from the free5gc. The images can be found on the link.
+```
+sudo kubectl apply -f unix-daemonset.yaml
+sudo kubectl apply -f free5gc-mongodb.yaml
+sudo kubectl apply -f free5gc-configmap.yaml
+sudo kubectl apply -f free5gc-nrf.yaml
+sudo kubectl apply -f free5gc-ausf.yaml
+sudo kubectl apply -f free5gc-smf.yaml
+sudo kubectl apply -f free5gc-nssf.yaml
+sudo kubectl apply -f free5gc-pcf.yaml
+sudo kubectl apply -f free5gc-udm.yaml
+sudo kubectl apply -f free5gc-udr.yaml
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo iptables -t nat -A POSTROUTING -o ens4 -j MASQUERADE
+git clone https://github.com/PrinzOwO/gtp5g
+cd gtp5g
+sudo apt install make
+```
