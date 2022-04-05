@@ -63,9 +63,7 @@ sudo docker ps
 ### Step 6: Test and access UE’s components
 ```docker exec -ti ue bash```
 
-```ping labora.inf.ufg.br -I```
-
-«ip-address-user-equipment-interface»
+```ping labora.inf.ufg.br -I «ip-address-user-equipment-interface»```
 
 ## Orchestrating containers using Kubernetes:
 To illustrate and monitor functions of the 5G deployment in the cloud, Kubernetes is used to orchestrate all the containerized components of the 5G network like core network functions, UE, and gNodeB. Kubernetes is an open-source framework for managing containerized workloads and services that enables declarative configuration and automation. It has a vast and fast-expanding ecosystem. Kubernetes' automation makes developing container-based apps much more accessible.
