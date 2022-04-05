@@ -36,7 +36,16 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 ```
 
-### Step 2: Clone Free5gc
+### Step 2: Clone Free5gc:
 ```
 sudo git clone https://github.com/free5gc/free5gc.wiki.git
  ```
+
+### Step 4: Run ansible-playbook code:
+
+The architecture will be deployed using Playbook code, and users will only need to run one command to have a 5G network functioning locally or in the cloud. Clone and change it per system specifications and save the file in YAML format.
+
+```
+sudo ansible-playbook -K file_name.yml -e "internet_network_interface=<< internet_network_interface >>"
+
+```
