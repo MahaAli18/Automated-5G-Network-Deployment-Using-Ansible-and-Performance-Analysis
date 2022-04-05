@@ -57,20 +57,57 @@ Creating an RDBMS by Logging in to the database component
 
 (MariaDB) and creating a Zabbix database and the credentials required to manage the database by issuing the following commands:
 
-```zabbix@zabbix: $ sudo mysql -uroot -p```
+```
+zabbix@zabbix: $ sudo mysql -uroot -p
+```
 
 Enter password: 
 
-```MariaDB [(none)]> create database zabbix character set utf8mb4 collate utf8mb4_bin;```
+```
+MariaDB [(none)]> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+```
 
 Query OK, 1 row affected (0.014 sec)
 
-```MariaDB [(none)]> create user zabbix@localhost identified by ’zabbix’;```
+```
+MariaDB [(none)]> create user zabbix@localhost identified by ’zabbix’;
+```
 
 Query OK, 0 rows affected (0.027 sec)
 
-```MariaDB [(none)]> grant all privileges on zabbix.* to zabbix@localhost;```
+```
+MariaDB [(none)]> grant all privileges on zabbix.* to zabbix@localhost;
+```
 
 Query OK, 0 rows affected (0.024 sec)
 
-```MariaDB [(none)]> quit;```
+```
+MariaDB [(none)]> quit;
+```
+
+### Step 6: 
+Zabbix server installation:
+
+The first step is to download the Zabbix repository by the following commands:
+
+```
+zabbix@zabbix: $ sudo wget https://repo.zabbix.com/zabbix/6.0/ubuntuarm64/pool/main/z/zabbix-release/zabbix-release_6.0-1+ubuntu20.04_all.deb
+```
+
+Using the debian package manager command as below:
+
+```
+zabbix@zabbix: $ sudo dpkg -i zabbix-releas_6.0-1+ubuntu20.04_all.deb
+```
+
+Installing Zabbix server:
+
+```
+zabbix@zabbix: $ sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+```
+
+Before configuring the server, first, importing Zabbix’s initial database schema to the MySQL database. Importing the schema against the database created for the Zabbix application by issuing the below command:
+
+```zabbix@zabbix: $ sudo zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
+```
+
