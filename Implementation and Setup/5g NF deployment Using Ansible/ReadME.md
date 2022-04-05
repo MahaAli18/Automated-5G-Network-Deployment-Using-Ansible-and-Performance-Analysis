@@ -36,7 +36,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 ```
 
-![This is an image](/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/Implementation_and_Setup/images/docker_setup.png)
+![This is an image](/Implementation_and_Setup/images/docker_setup.png)
 
 
 ### Step 2: Clone Free5gc:
