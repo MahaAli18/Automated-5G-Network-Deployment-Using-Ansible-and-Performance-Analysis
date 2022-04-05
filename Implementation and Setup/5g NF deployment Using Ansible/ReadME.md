@@ -74,3 +74,21 @@ To illustrate and monitor functions of the 5G deployment in the cloud, Kubernete
 Ubuntu Version: 18.04.6 LTS (Bionic Beaver)
 Disk Space: 100 GB
 RAM: 4 GB
+
+### Step 1: Kubernetes Installation and Setup
+```
+sudo apt-get update
+sudo apt-get install curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+sudo apt-get install kubeadm kubelet kubectl kubernetes-cni
+sudo swapoff -a
+sudo kubeadm init
+```
+### Step 2: Setting up the local Kubernetes Cluster using minikube
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+sudo -E minikube start --driver=none
+sudo minikube start
+```
