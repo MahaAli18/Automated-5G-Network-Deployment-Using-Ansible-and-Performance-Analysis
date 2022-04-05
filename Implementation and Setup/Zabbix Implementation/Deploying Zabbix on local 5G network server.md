@@ -168,7 +168,7 @@ zabbix@zabbix: $ ifconfig enp0s10
 
 enp0s10: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
  
-Inet ### 192.168.64.6 netmask 255.255.255.0 broadcast 192.168.64.255
+Inet **192.168.64.6** netmask 255.255.255.0 broadcast 192.168.64.255
  
 inet6 fe80::dce0:b7ff:fe1a:5c06 prefixlen 64 scopeid 0x20<link>
  
@@ -176,18 +176,18 @@ inet6 fd02:9ec7:a164:d0c9:dce0:b7ff:fe1a:5c06 prefixlen 64 scopeid 0x0<global>
  
 We need our local VM machine configured accordingly to complete the Zabbix front-end setup.Once the server was set up with the correct configuration, we used the Zabbix server frontend in the browser to complete the rest of the Zabbix frontend deployments as below:
  
-In the browser, access the frontend with
-### http://192.168.64.6/zabbix.
+In the browser, access the frontend with http://192.168.64.6/zabbix
 
 The following steps were followed for the frontend config and to generate communication between server and frontend:
  
-Step 1:Following GUI opens for Zabbix front-end setup upon the successful communication link
+ **Step 1: Following GUI opens for Zabbix front-end setup upon the successful communication link
+
+ Step 2: All the required and measured values should be green as below:
+
+ Step 3: Pre-installation summary with our created database configuration
+
+ Step 4: Zabbix frontend is successfully configured and deployed**
  
-Step 2:All the required and measured values should be green as below:
- 
-Step 3:Pre-installation summary with our created database configuration
- 
-Step 4:Zabbix frontend is successfully configured and deployed
-Now, the Zabbix server host is created in the dashboard, and we can see the metrics collected in real-time for the Zabbix server.
+ Now, the Zabbix server host is created in the dashboard, and we can see the metrics collected in real-time for the Zabbix server.
 
 
