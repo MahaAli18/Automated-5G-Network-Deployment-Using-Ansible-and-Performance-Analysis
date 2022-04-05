@@ -91,7 +91,7 @@ sudo -E minikube start --driver=none
 sudo minikube start
 ```
 ### Step 3: Setting up the Kubectl
-``` sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
+sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
@@ -103,4 +103,4 @@ sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-opera
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/backup_crd.yaml
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/operator.yaml
 sudo kubectl create -f https://raw.githubusercontent.com/openshift/etcd-ha-operator/master/deploy/cr.yaml
-sudo kubectl get pods ```
+sudo kubectl get pods 
