@@ -45,3 +45,32 @@ Setting up the database MariaDB and installing packages:
 
 ```zabbix@zabbix: $ sudo systemctl start mariadb```
 
+Installation of MariaDB:
+
+```zabbix@zabbix: $ sudo systemctl start mariadb```
+
+```zabbix@zabbix: $ sudo mysql_secure_installation```
+
+### Step 5:
+
+Creating an RDBMS by Logging in to the database component
+
+(MariaDB) and creating a Zabbix database and the credentials required to manage the database by issuing the following commands:
+
+```zabbix@zabbix: $ sudo mysql -uroot -p```
+
+Enter password: 
+
+```MariaDB [(none)]> create database zabbix character set utf8mb4 collate utf8mb4_bin;```
+
+Query OK, 1 row affected (0.014 sec)
+
+```MariaDB [(none)]> create user zabbix@localhost identified by ’zabbix’;```
+
+Query OK, 0 rows affected (0.027 sec)
+
+```MariaDB [(none)]> grant all privileges on zabbix.* to zabbix@localhost;```
+
+Query OK, 0 rows affected (0.024 sec)
+
+```MariaDB [(none)]> quit;```
