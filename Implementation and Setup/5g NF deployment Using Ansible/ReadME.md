@@ -72,6 +72,7 @@ sudo docker ps
 ```docker exec -ti ue bash```
 
 ```ping labora.inf.ufg.br -I «ip-address-user-equipment-interface»```
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/ping%2010.0.2.2.png)
 
 ## Orchestrating containers using Kubernetes:
 To illustrate and monitor functions of the 5G deployment in the cloud, Kubernetes is used to orchestrate all the containerized components of the 5G network like core network functions, UE, and gNodeB. Kubernetes is an open-source framework for managing containerized workloads and services that enables declarative configuration and automation. It has a vast and fast-expanding ecosystem. Kubernetes' automation makes developing container-based apps much more accessible.
