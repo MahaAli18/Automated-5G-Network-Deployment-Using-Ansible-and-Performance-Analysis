@@ -70,6 +70,7 @@ sudo docker ps
 
 ### Step 6: Test and access UE’s components
 ```docker exec -ti ue bash```
+![This is an image](://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Docker%20exec.png)
 
 ```ping labora.inf.ufg.br -I «ip-address-user-equipment-interface»```
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/ping%2010.0.2.2.png)
