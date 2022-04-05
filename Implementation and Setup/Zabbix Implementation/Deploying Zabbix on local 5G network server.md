@@ -12,3 +12,20 @@ To provide the web-backed capability for Zabbix Server, first update the softwar
 Then install apache web server by following command:
 
 ```zabbix@zabbix:-$ sudo apt install apache2 php php-mysql php-mysqlnd php-ldap php-bcmath php-mbstring php-gd php-pdo php-xml libapache2-mod-php```
+
+### Step 2:
+
+Now to tune the PHP interpreter, adjust some values in order to run Zabbix Server. So, open Apache php.ini configuration file for editing by
+issuing the following command:
+```zabbix@zabbix:-$ sudo nano /etc/php/7.X/apache2/php.in```
+
+Changes done in the file are:
+
+```post_max_size= 16M```
+```upload_max_filesize= 2M```
+```max_execution_time= 300```
+```max_input_time= 300```
+```memory_limit = 128M```
+```session.auto_start= 0```
+```mbstring.func_overload= 0```
+```date.timezone= America/Toronto```
