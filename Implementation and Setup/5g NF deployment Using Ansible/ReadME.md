@@ -142,3 +142,4 @@ cd gtp5g
 sudo apt install make
 ```
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Container%20Deployment%20of%20Kubernetes.png)
+![This is an image](://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Pod%20running%20status.png)
