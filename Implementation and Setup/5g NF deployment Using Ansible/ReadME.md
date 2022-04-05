@@ -55,3 +55,12 @@ The architecture will be deployed using Playbook code, and users will only need 
 sudo ansible-playbook -K file_name.yml -e "internet_network_interface=<< internet_network_interface >>"
 
 ```
+### Step 5: To Check the Status of Containers running.
+```
+sudo docker ps
+
+```
+### Step 6: Test and access UE’s components
+```docker exec -ti ue bash```
+```ping labora.inf.ufg.br -I```
+«ip-address-user-equipment-interface»
