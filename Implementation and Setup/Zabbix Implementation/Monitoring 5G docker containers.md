@@ -40,3 +40,21 @@ Following configurations are done in the zabbix agent 2 config file :
 ```ServerActive: 192.168.64.6 ( zabbix server IP )```
 
 ```Hostname : maha-virtual-machine ( our docker container server )```
+
+### Step 3:
+Zabbix user is added, which is installed by default, to the docker group for the Zabbix agent to monitor Docker containers.
+
+
+```sudo usermod -aG docker zabbix```
+
+### Step 4:
+Apply all the changes and enable the zabbix agent 2
+
+```sudo systemctl restart zabbix-agent2```
+
+```sudo systemctl enable zabbix-agent2```
+
+### Step 5:
+Running the status command to see zabbix agent 2 is running or not
+
+``` sudo systemctl status zabbix-agent2```
