@@ -101,6 +101,9 @@ sudo -E minikube start --driver=none
 sudo minikube start
 ```
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/kub_minikube.PNG) 
+
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/minikubestart.png)
+
 ### Step 3: Setting up the Kubectl
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
