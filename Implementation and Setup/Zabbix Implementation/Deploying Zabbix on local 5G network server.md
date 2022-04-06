@@ -12,7 +12,7 @@ To provide the web-backed capability for Zabbix Server, first update the softwar
 Then install apache web server by following command:
 
 ```zabbix@zabbix:-$ sudo apt install apache2 php php-mysql php-mysqlnd php-ldap php-bcmath php-mbstring php-gd php-pdo php-xml libapache2-mod-php```
-
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Software%20Update-Zabbix.png)
 ### Step 2:
 
 Now to tune the PHP interpreter, adjust some values in order to run Zabbix Server. So, open Apache php.ini configuration file for editing by
