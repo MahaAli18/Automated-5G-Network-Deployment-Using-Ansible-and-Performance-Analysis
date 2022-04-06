@@ -193,6 +193,8 @@ The following steps were followed for the frontend config and to generate commun
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/GUI%20Zabbix.png)
 
  **Step 2: All the required and measured values should be green as below:**
+ 
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/current%20status.png)
 
  **Step 3: Pre-installation summary with our created database configuration**
 
