@@ -197,6 +197,8 @@ The following steps were followed for the frontend config and to generate commun
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/current%20status.png)
 
  **Step 3: Pre-installation summary with our created database configuration**
+ 
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/zabbix%20installation%20config.png)
 
  **Step 4: Zabbix frontend is successfully configured and deployed**
  
