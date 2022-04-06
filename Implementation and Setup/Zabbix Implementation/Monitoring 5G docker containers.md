@@ -97,3 +97,7 @@ Creating a host at zabbix frontend and adding a template called "Template app do
 
 ![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Network%20traffic.png)
 
+**Performance Metrics: Server Disk Metrics**
+
+![This is an image]( https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/Zabbix%20server%20metrics.png) 
+
