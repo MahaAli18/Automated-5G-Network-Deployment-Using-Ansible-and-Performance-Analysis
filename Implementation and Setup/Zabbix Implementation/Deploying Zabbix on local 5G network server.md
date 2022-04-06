@@ -189,6 +189,8 @@ In the browser, access the frontend with http://192.168.64.6/zabbix
 The following steps were followed for the frontend config and to generate communication between server and frontend:
  
  **Step 1: Following GUI opens for Zabbix front-end setup upon the successful communication link**
+ 
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/GUI%20Zabbix.png)
 
  **Step 2: All the required and measured values should be green as below:**
 
