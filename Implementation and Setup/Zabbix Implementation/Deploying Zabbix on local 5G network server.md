@@ -202,6 +202,8 @@ The following steps were followed for the frontend config and to generate commun
 
  **Step 4: Zabbix frontend is successfully configured and deployed**
  
+![This is an image](https://github.com/MahaAli18/Automated-5G-Network-Deployment-Using-Ansible-and-Performance-Analysis/blob/main/Implementation%20and%20Setup/images/success%20installation%20database.png)
+ 
  Now, the Zabbix server host is created in the dashboard, and we can see the metrics collected in real-time for the Zabbix server.
 
 
